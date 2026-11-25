@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thanksgiving Prep · Wed Nov 25, 2026</title>
+<style>
+body{margin:0;font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:#fbf6ef;color:#3b2a1e}
+header{background:linear-gradient(135deg,#8a3b12,#c8661c);color:#fff;padding:28px 20px 22px;text-align:center}
+header h1{margin:0;font-size:28px}header p{margin:6px 0 0;opacity:.9}
+main{max-width:640px;margin:0 auto;padding:16px}
+.item{background:#fff;border-radius:14px;padding:14px 16px;margin:12px 0;box-shadow:0 1px 4px rgba(0,0,0,.08);border-left:6px solid #c8661c}
+.item.done{opacity:.55;border-left-color:#5a8a3a}.item.done h2{text-decoration:line-through}
+label{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+input{width:26px;height:26px;accent-color:#5a8a3a;flex:none;margin-top:2px}
+h2{font-size:19px;margin:0 0 6px}.ing{font-size:14px;color:#7a5a40;margin:4px 0}
+ol{margin:6px 0 0;padding-left:20px;font-size:15px;line-height:1.45}
+.sec{margin:22px 0 4px;font-weight:700;color:#8a3b12;text-transform:uppercase;letter-spacing:.05em;font-size:13px}
+footer{text-align:center;font-size:13px;color:#7a5a40;padding:16px 16px 30px}
+</style></head><body>
+<header><h1>🦃 Thanksgiving Prep</h1><p>Wednesday, Nov 25 · get ahead for tomorrow</p></header>
+<main>
+<div class="sec">Today's list</div>
+<div id="list"></div>
+<footer>Tap a box when it's done. Your checks save on this phone.</footer>
+</main>
+<script>
+const items=[
+["Boil the giblets","Turkey giblets + neck, water to cover, onion &amp; celery scraps, salt",["Cover with cold water in a pot, add scraps and salt.","Simmer gently about 1 hour.","Strain, save the broth for gravy, chill."]],
+["Fresh cranberry salad","1 bag (12 oz) fresh cranberries, 1 cup sugar, 1 cup water or orange juice",["Bring sugar and water/OJ to a boil.","Add cranberries; simmer until they pop, about 10 minutes.","Cool, then chill to set."]],
+["Chop veggies for the dressing","Celery, carrots, onion",["Dice evenly.","Bag together and refrigerate for tomorrow."]],
+["Brine the turkey","Kosher salt, sugar, water (optional peppercorns, bay leaves, citrus)",["Dissolve salt and sugar in water; cool completely.","Submerge turkey fully; refrigerate 12–24 hours.","Before roasting: rinse and pat dry."]],
+["Chop the soup vegetables","All soup vegetables <b>except potatoes</b>",["Chop and bag.","Refrigerate. Cut potatoes fresh tomorrow so they don't brown."]],
+["Cook the sweet potatoes","Sweet potatoes",["Roast at 400°F for 45–60 min, or boil cubed for 15–20 min, until fork-tender.","Cool and refrigerate."]],
+["Dry the bread for dressing","Bread, cubed",["Cube and spread on a sheet pan.","Leave out to dry overnight (or toast at 250°F for 20–30 min)."]],
+["Make dessert ahead","Pie or dessert of choice",["Bake today so the oven is free tomorrow.","Cover once cool."]],
+["Set the table &amp; chill drinks","Serving dishes, utensils, drinks",["Pull out platters and label what goes in each.","Chill wine and drinks overnight."]],
+["Plan tomorrow's oven timeline","Turkey weight, roast time, sides",["Work back from dinner time: turkey in, rest 30 min, sides in while it rests."]]
+];
+const key="tg-2026-11-25",st=JSON.parse(localStorage.getItem(key)||"{}"),L=document.getElementById("list");
+items.forEach((it,i)=>{const d=document.createElement("div");d.className="item"+(st[i]?" done":"");
+d.innerHTML=`<label><input type="checkbox" ${st[i]?"checked":""}><div><h2>${it[0]}</h2><div class="ing">🧺 ${it[1]}</div><ol>${it[2].map(s=>"<li>"+s+"</li>").join("")}</ol></div></label>`;
+d.querySelector("input").onchange=e=>{st[i]=e.target.checked;localStorage.setItem(key,JSON.stringify(st));d.classList.toggle("done",e.target.checked)};L.appendChild(d)});
+</script></body></html>
